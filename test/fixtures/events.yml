@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  from: 2012-10-09 11:42:43
+  to: 2012-10-09 11:42:43
+  position: MyString
+  desc: MyString
+  color: 1
+  privacy: 1
+  work: false
+  user_id: 1
+
+two:
+  name: MyString
+  from: 2012-10-09 11:42:43
+  to: 2012-10-09 11:42:43
+  position: MyString
+  desc: MyString
+  color: 1
+  privacy: 1
+  work: false
+  user_id: 1
+# == Schema Information
+#
+# Table name: events
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  from       :datetime
+#  to         :datetime
+#  position   :string(255)
+#  desc       :string(255)
+#  color      :integer
+#  privacy    :integer
+#  work       :boolean
+#  user_id    :integer
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#
+

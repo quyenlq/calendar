@@ -1,0 +1,173 @@
+@import "bootstrap";
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+/*OVERRIDE BOOTSTRAP */
+.hero-unit{
+	text-align: center;
+}
+.new_link{
+	margin: 10px;
+}
+.big-title{
+    text-align: center;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+.clearfix {
+  float:none !important;
+}
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+ }
+#custom-field{
+  margin-top: 10px;
+  font-weight: bold;
+  color: #09C;
+  font-size: 110%;
+  input{
+    padding: 5px;
+  }
+}
+.url-info{
+  .title{
+    margin: 10px 0 20px 0px;
+    font-weight: bold;
+    font-size: 130%;
+    img{
+      margin: 0 5px;
+    }    
+  }
+  .desc{
+    text-align: justify;
+    font-style: italic;
+    font-size: 80%;
+  }
+ }
+
+.add-btn{
+  width: 95%;
+  margin: 10px 0 10px 0;
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  height: auto !important;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+.item-link{
+  margin-bottom: 30px;
+  .title{
+      margin: 10px 0 20px 0px;
+      font-weight: bold;
+      img{
+        margin: 0 5px;
+      }    
+    }
+
+  .box-name{
+    margin-left: 5px;
+    font-style: italic;
+    font-size: 90%;
+  }
+
+  input{
+    margin: 5px;
+  }
+  .date{
+    display: inline;
+    color: #666;
+    font-size: 75%;
+    font-style: italic;
+  }
+  .toolbar{
+    margin: 10px 0 10px 0;
+    padding-left: 5px;
+  }
+
+  .details{
+    margin-top: 50px;
+    .desc{
+      font-size: 90%;
+      margin: 10px 0 0 5px;
+      text-align: justify;
+      font-style: italic;
+    }
+  .close{
+      padding-top: 30px;
+    }
+  }
+}
+
+/* HEADER */
+body{
+	margin-top: 80px;
+  background-color: #ECF3FD !important;
+}
+
+.bookmark{
+  text-align: center;
+
+  }
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #09C;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+#logo:hover {
+  color: #999;
+  text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+footer a {
+  color: #555;
+}  
+
+footer a:hover { 
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}
