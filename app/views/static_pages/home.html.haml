@@ -1,3 +1,6 @@
 -provide(:title,'Home')
 .row
-	=render 'shared/signin' unless signed_in?
+	-if !signed_in?
+		=render 'shared/signin' 
+	-else 
+		=render 'userpage'

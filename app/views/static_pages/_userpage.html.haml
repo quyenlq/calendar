@@ -1,0 +1,8 @@
+.span3
+	=link_to 'Create new event', new_event_path, class: "btn btn-large btn-primary"
+.span8.offset3
+	#calendar
+		=calendar_for @events do |calendar|
+			=calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
+			-calendar.day(:day_method => :from) do |date, articles|
+				=date.day

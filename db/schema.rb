@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(:version => 20121009044554) do
     t.datetime "to"
     t.string   "position"
     t.string   "desc"
-    t.integer  "color"
-    t.integer  "privacy"
+    t.integer  "color",      :default => 0
+    t.integer  "privacy",    :default => 0
     t.boolean  "work"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "events", ["user_id", "created_at"], :name => "index_events_on_user_id_and_created_at"

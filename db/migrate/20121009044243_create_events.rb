@@ -2,7 +2,7 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.string :name
-      t.datetime :from, :default => Datetime.current
+      t.datetime :from
       t.datetime :to
       t.string :position
       t.string :desc

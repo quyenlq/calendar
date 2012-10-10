@@ -1,0 +1,60 @@
+-provide(:title, 'New event')
+%h1 Create new user
+.row
+  .span6.offset3
+    %table
+      =form_for(@event, :html =>{class: "form-inline event-form"}) do |f| 
+        = render 'shared/error_messages' , object: @event
+        %tr
+          %td=f.label :name
+          %td{:colspan =>2}=f.text_field :name
+
+        %tr
+          %td=f.label :from
+          %td=f.text_field :fromdate, class: "span3"
+          %td=f.text_field :fromtime, class: "span3"
+      
+        %tr
+          %td=f.label :to
+          %td=f.text_field :todate, class: "span3"
+          %td=f.text_field :totime, class: "span3"
+
+        %tr
+          %td=f.label :position
+          %td{:colspan =>2}=f.text_field :position
+
+        %tr
+          %td=f.label :desc
+          %td{:colspan =>2}=f.text_area :desc, rows: 2, cols: 60
+        %tr
+          %td=f.label :color
+          %td=render 'colorpicker', f: f
+        %tr
+          %td= f.label :work
+          %td
+            = f.radio_button :work, true, checked: true
+            Yes
+            
+          %td
+            = f.radio_button :work, false
+            No
+            
+        %tr
+          %td{:colspan =>3}= f.submit "Create event", class: "btn btn-large btn-primary" 
+
+
+
+%script{:type => "text/javascript"}
+  $('#event_fromdate').datetimepicker({
+  altField: "#event_fromtime",
+  dateFormat: "dd-mm-yy",
+  timeFormat: "hh:mm",
+  });
+  $('#event_todate').datetimepicker({
+  altField: "#event_totime",
+  dateFormat: "dd-mm-yy",
+  timeFormat: "hh:mm"
+  });
+
+
+

@@ -10,7 +10,10 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'sqlite3'
 gem 'bootstrap-sass', '2.1.0'
 gem 'faker', '1.0.1'
+gem 'jquery-ui-rails'
 gem 'haml'
+gem "watu_table_builder", :require => "table_builder"
+
 group :development, :test do
   gem 'annotate', '~> 2.4.1.beta' # use it for annotating database
 end
@@ -26,7 +29,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-gem 'jquery-rails'
+gem 'jquery-rails', '>=2.0.2'
 gem 'pry', '0.9.9.4'
 # To use ActiveModel has_secure_password
 
