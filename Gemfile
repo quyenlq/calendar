@@ -13,6 +13,7 @@ gem 'faker', '1.0.1'
 gem 'jquery-ui-rails'
 gem 'haml'
 gem "watu_table_builder", :require => "table_builder"
+gem 'fullcalendar-rails'
 
 group :development, :test do
   gem 'annotate', '~> 2.4.1.beta' # use it for annotating database
@@ -29,7 +30,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-gem 'jquery-rails', '>=2.0.2'
+gem 'jquery-rails', '2.1.2'
 gem 'pry', '0.9.9.4'
 # To use ActiveModel has_secure_password
 

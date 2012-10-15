@@ -1,11 +1,19 @@
 Calendar::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new,:create,:destroy]
-  resources :events
+  resources :events, only: [:new,:create,:update,:destroy]
 
-  root to: "static_pages#home"
+  root to: "static_pages#home", as: :home
   match '/signin', to: "sessions#new"
   match '/signout', to: "sessions#destroy", via: :delete
+
+
+  match '/events/get_events'
+  match '/events/resize'
+  match '/events/move'
+  match '/events/destroy'
+
+ 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

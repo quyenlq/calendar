@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
 	validates :to, presence: true
 	validates :work, presence:true  
 	validates :color, :numericality => { :only_integer => true, greater_than_or_equal_to: 0, less_than_or_equal_to: 9 }
-	belongs_to :user, dependent: :destroy
+	belongs_to :user
 
 	attr_accessor :fromtime, :fromdate, :totime, :todate
 
