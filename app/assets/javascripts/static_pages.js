@@ -7,8 +7,9 @@ $(document).ready(function(){
       right: 'month,agendaWeek,agendaDay'
     },
     defaultView: 'month',
-    height: 500,
-    slotMinutes: 15,
+    height: 600,
+    width: 940,
+    slotMinutes: 30,
     loading: function(bool){
       if (bool) 
         $('#loading').show();
@@ -19,21 +20,13 @@ $(document).ready(function(){
     timeFormat: 'h:mm t{ - h:mm t} ',
     dragOpacity: "0.5",
     eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
-     if (confirm("Are you sure about this change?")) {
       moveEvent(event, dayDelta, minuteDelta, allDay);
-    }
-    else {
-     revertFunc();
-   }
+
  },
  
  eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
-   if (confirm("Are you sure about this change?")) {
     resizeEvent(event, dayDelta, minuteDelta);
-  }
-  else {
-   revertFunc();
- }
+
 },
 
 eventClick: function(event, jsEvent, view){

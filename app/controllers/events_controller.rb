@@ -1,7 +1,5 @@
 class EventsController < ApplicationController
 	before_filter :correct_user, only: [:destroy, :edit, :update,:move, :resize]
-	def show
-	end
 
 	def index
 	end
@@ -28,17 +26,18 @@ class EventsController < ApplicationController
     	end
     	events = [] 
     	@events.each do |event|
-      		events << {:id => event.id, :title => event.name, :description => event.desc || "Some cool description here...", :start => "#{event.from.iso8601}", :end => "#{event.to.iso8601}"}
+      		events << {:id => event.id, :title => event.name, :description => event.desc, :color => event.color, :start => "#{event.from.iso8601}", :end => "#{event.to.iso8601}",:allDay => event.allDay}
     	end
     	render :text => events.to_json
+
   	end
 
-  	def move
+  def move
     @event = Event.find_by_id params[:id]
     if @event
       new_from = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.from))
       new_to = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.to))
-      # @event.all_day = params[:all_day]      
+      @event.update_attribute("allDay",params[:allDay])
       @event.update_attribute("from", new_from)
       @event.update_attribute("to", new_to)
     end
@@ -54,7 +53,7 @@ class EventsController < ApplicationController
       new_to = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.to))
       @event.update_attribute("to",new_to)
     end
-
+    
     respond_to do |format|
       format.js
     end    
@@ -62,18 +61,21 @@ class EventsController < ApplicationController
   
   def edit
     @event = Event.find_by_id(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
   
   def update
-    @event = Event.find_by_id(params[:event][:id])
-    if params[:event][:commit_button] == "Update All Occurrence"
-      @events = @event.event_series.events #.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
+    @event = Event.find(params[:id])
+    if params[:event][:commit] == "Update All Occurrence"
+      @events = @event.event_series.events
       @event.update_events(@events, params[:event])
-    elsif params[:event][:commit_button] == "Update All Following Occurrence"
+    elsif params[:event][:commit] == "Update All Following Occurrence"
       @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
       @event.update_events(@events, params[:event])
     else
-      @event.attributes = params[:event]
+      @event.update_attributes(params[:event])
       @event.save
     end
 

@@ -10,6 +10,10 @@
           %td{:colspan =>2}=f.text_field :name
 
         %tr
+          %td= f.label :allDay, "All day "
+          %td
+            = f.check_box :allDay
+        %tr
           %td=f.label :from
           %td=f.text_field :fromdate, class: "span3"
           %td=f.text_field :fromtime, class: "span3"
@@ -28,7 +32,7 @@
           %td{:colspan =>2}=f.text_area :desc, rows: 2, cols: 60
         %tr
           %td=f.label :color
-          %td=render 'colorpicker', f: f
+          %td{:colspan =>2}=f.text_field :color, class: "color1"
         %tr
           %td= f.label :work
           %td
@@ -38,13 +42,18 @@
           %td
             = f.radio_button :work, false
             No
-            
+        
+
         %tr
-          %td{:colspan =>3}= f.submit "Create event", class: "btn btn-large btn-primary" 
+          %td{:colspan =>3}= f.submit "Edit", class: "btn btn-large btn-primary" 
 
 
 
 %script{:type => "text/javascript"}
+
+  $('#event_fromtime').prop('disabled',$('#event_allDay').is(':checked'))
+  $('#event_totime').prop('disabled',$('#event_allDay').is(':checked'))
+
   $('#event_fromdate').datetimepicker({
   altField: "#event_fromtime",
   dateFormat: "dd-mm-yy",
@@ -55,6 +64,20 @@
   dateFormat: "dd-mm-yy",
   timeFormat: "hh:mm"
   });
+  $('.color1').colorPicker();
+  $('#event_allDay').click(function(){
+  var thisCheck = $(this)
+  if(thisCheck.is(':checked')){
+  $('#event_fromtime').val('')
+  $('#event_fromtime').prop('disabled',true)
+  $('#event_totime').val('')
+  $('#event_totime').prop('disabled',true)
+  }
+  else{
+  $('#event_fromtime').prop('disabled',false)
+  $('#event_totime').prop('disabled',false)
+  }
+  })
 
 
 

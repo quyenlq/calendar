@@ -164,11 +164,17 @@ input, textarea, select, .uneditable-input {
   }
 
 }
+/*CALENDAR STYLE */
 
-#calendar #month a, #calendar #month a:hover {
-  text-decoration: none;
-  padding: 0 10px;
-  color: #999;
+#calendar{
+  .fc-header{
+    tbody{
+      td{
+        height: 50px;  
+      }
+    }
+    
+  }
 }
 
 /*DATETIMEPICKER */

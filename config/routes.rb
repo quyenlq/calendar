@@ -3,7 +3,7 @@ Calendar::Application.routes.draw do
   resources :sessions, only: [:new,:create,:destroy]
   resources :events, only: [:new,:create,:update,:destroy]
 
-  root to: "static_pages#home", as: :home
+  root to: "static_pages#home"
   match '/signin', to: "sessions#new"
   match '/signout', to: "sessions#destroy", via: :delete
 
@@ -12,6 +12,7 @@ Calendar::Application.routes.draw do
   match '/events/resize'
   match '/events/move'
   match '/events/destroy'
+  match '/events/edit'
 
  
 

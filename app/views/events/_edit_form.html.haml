@@ -1,0 +1,85 @@
+=form_for(@event, :html =>{class: "event-form"}, remote: true) do |f| 
+  .modal-header
+    %button.close{type: "button", "data-dismiss" => "modal", "aria-hidden" => "true"} ×
+    %h3#myModalLabel Edit events
+  .modal-body
+    %table
+      %tr
+        %td=f.label :name
+        %td{:colspan =>2}=f.text_field :name
+        
+      %tr
+        %td= f.label :allDay, "All day "
+        %td
+          = f.check_box :allDay
+      %tr
+        %td=f.label :from
+        %td=f.text_field :fromdate, class: "span3"
+        %td=f.text_field :fromtime, class: "span3"
+    
+      %tr
+        %td=f.label :to
+        %td=f.text_field :todate, class: "span3"
+        %td=f.text_field :totime, class: "span3"
+
+      %tr
+        %td=f.label :position
+        %td{:colspan =>2}=f.text_field :position
+
+      %tr
+        %td=f.label :desc
+        %td{:colspan =>2}=f.text_area :desc, rows: 2, cols: 60
+      %tr
+        %td=f.label :color
+        %td{:colspan =>2}=f.text_field :color, class: "color1"
+      %tr
+        %td= f.label :work
+        %td
+          = f.radio_button :work, true, checked: true
+          Yes
+          
+        %td
+          = f.radio_button :work, false
+          No
+      
+
+        
+  .modal-footer
+    %button.btn{"data-dismiss" => "modal", "aria-hidden" => "true"} Close
+    =f.submit "Save changes", class: "btn btn-primary"
+
+
+
+
+%script{:type => "text/javascript"}
+
+  $('#event_fromtime').prop('disabled',$('#event_allDay').is(':checked'))
+  $('#event_totime').prop('disabled',$('#event_allDay').is(':checked'))
+
+  $('#event_fromdate').datetimepicker({
+  altField: "#event_fromtime",
+  dateFormat: "dd-mm-yy",
+  timeFormat: "hh:mm",
+  });
+  $('#event_todate').datetimepicker({
+  altField: "#event_totime",
+  dateFormat: "dd-mm-yy",
+  timeFormat: "hh:mm"
+  });
+  $('.color1').colorPicker();
+  $('#event_allDay').click(function(){
+  var thisCheck = $(this)
+  if(thisCheck.is(':checked')){
+  $('#event_fromtime').val('')
+  $('#event_fromtime').prop('disabled',true)
+  $('#event_totime').val('')
+  $('#event_totime').prop('disabled',true)
+  }
+  else{
+  $('#event_fromtime').prop('disabled',false)
+  $('#event_totime').prop('disabled',false)
+  }
+  })
+
+
+

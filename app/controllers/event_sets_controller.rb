@@ -1,0 +1,2 @@
+class EventSetsController < ApplicationController
+end

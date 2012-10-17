@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  frequency: 
+  period: 
+  from: 
+  to: 
+  allDay: 
+  weekdays: 1
+
+two:
+  frequency: 
+  period: 
+  from: 
+  to: 
+  allDay: 
+  weekdays: 1

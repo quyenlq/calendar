@@ -15,8 +15,8 @@ end
 #  to         :datetime
 #  position   :string(255)
 #  desc       :string(255)
-#  color      :integer
-#  privacy    :integer
+#  color      :string(255)     default("0")
+#  privacy    :integer         default(0)
 #  work       :boolean
 #  user_id    :integer
 #  created_at :datetime        not null
