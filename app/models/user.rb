@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true 	
 
   has_many :events, dependent: :destroy
-
+  has_many :event_sets, dependent: :destroy
 
 
   private

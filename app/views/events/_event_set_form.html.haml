@@ -1,0 +1,12 @@
+%tr#frequency{:style => "display:none"}
+	%td=f.label :frequency, "Repeat every"
+	%td
+		=f.select :frequency, (1..30).to_a
+		%span#period
+		=f.label "Finish after"
+		=text_field_tag 'event[times]', nil, class: "times"
+		times
+
+
+		
+		

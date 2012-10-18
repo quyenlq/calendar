@@ -6,16 +6,20 @@
   box-sizing: border-box;
 }
 /*OVERRIDE BOOTSTRAP */
-.event-form{
-  
+.mytable{
+  label{
+    float:left;
+    padding: 0px 20px;
+  }
+  select{
+    width: 120px;
+  }
+  .times{
+      width: 50px;
+  }
 }
 
-.hero-unit{
-	text-align: center;
-}
-.new_link{
-	margin: 10px;
-}
+
 .big-title{
     text-align: center;
 }
@@ -193,7 +197,7 @@ input, textarea, select, .uneditable-input {
 /* HEADER */
 body{
 	margin-top: 80px;
-  background-color: #ECF3FD !important;
+  background-color: #EEE !important;
 }
 
 .bookmark{

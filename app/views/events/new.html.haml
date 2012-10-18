@@ -1,27 +1,31 @@
 -provide(:title, 'New event')
-%h1 Create new user
+%h1 Create new event
 .row
-  .span6.offset3
-    %table
-      =form_for(@event, :html =>{class: "form-inline event-form"}) do |f| 
+  .span8.offset2
+    %table.mytable
+      =form_for(@event) do |f| 
         = render 'shared/error_messages' , object: @event
         %tr
           %td=f.label :name
           %td{:colspan =>2}=f.text_field :name
 
         %tr
-          %td= f.label :allDay, "All day "
+          %td= f.label :period, "Repeats" 
           %td
-            = f.check_box :allDay
+            = f.select :period, Event::REPEATS, {}, :onchange => "showPeriodAndFrequency(this.value)"
+        =render 'event_set_form', f: f
+
         %tr
           %td=f.label :from
-          %td=f.text_field :fromdate, class: "span3"
-          %td=f.text_field :fromtime, class: "span3"
+          %td
+            =f.text_field :fromdate, class: "span2"
+            =f.text_field :fromtime, class: "span2"
       
         %tr
           %td=f.label :to
-          %td=f.text_field :todate, class: "span3"
-          %td=f.text_field :totime, class: "span3"
+          %td
+            =f.text_field :todate, class: "span2"
+            =f.text_field :totime, class: "span2"
 
         %tr
           %td=f.label :position
@@ -30,6 +34,12 @@
         %tr
           %td=f.label :desc
           %td{:colspan =>2}=f.text_area :desc, rows: 2, cols: 60
+
+        %tr
+          %td= f.label :allDay, "All day "
+          %td
+            = f.check_box :allDay
+
         %tr
           %td=f.label :color
           %td{:colspan =>2}=f.text_field :color, class: "color1"
@@ -38,14 +48,13 @@
           %td
             = f.radio_button :work, true, checked: true
             Yes
-            
-          %td
             = f.radio_button :work, false
             No
         
 
         %tr
-          %td{:colspan =>3}= f.submit "Edit", class: "btn btn-large btn-primary" 
+          %td
+          %td{:colspan =>3}= f.submit "Create", class: "btn btn-large btn-primary span4" 
 
 
 
@@ -78,6 +87,7 @@
   $('#event_totime').prop('disabled',false)
   }
   })
+
 
 
 

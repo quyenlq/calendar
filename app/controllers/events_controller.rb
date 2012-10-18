@@ -9,26 +9,36 @@ class EventsController < ApplicationController
 	end
 
 	def create
-		@event = current_user.events.build(params[:event])
-		if(@event.save)
-			flash[:success] = "Created new event"
-			redirect_to root_url
-		else
-			render 'new'
-		end
+    binding.pry
+		if(params[:event][:period] == "Does not repeat")
+      @event = current_user.events.build(params[:event])
+      if @event.save
+			 flash[:success] = "Created new event"
+			 redirect_to root_url
+		  else
+			 render 'new'
+		  end
+    else 
+      @event_set = current_user.event_sets.build(params[:event])
+      if @event_set.save
+       flash[:success] = "Created new event"
+       redirect_to root_url
+      else
+      end
+    end
 	end
 
 	def get_events
-    	@events = current_user.events.all
-    	public_events = Event.find(:all, :conditions => ["privacy == 0 and user_id != #{current_user.id}"] )
-    	public_events.each do |pe|
-    		@events << pe
-    	end
-    	events = [] 
-    	@events.each do |event|
-      		events << {:id => event.id, :title => event.name, :description => event.desc, :color => event.color, :start => "#{event.from.iso8601}", :end => "#{event.to.iso8601}",:allDay => event.allDay}
-    	end
-    	render :text => events.to_json
+  	@events = current_user.events.all
+  	public_events = Event.find(:all, :conditions => ["privacy == 0 and user_id != #{current_user.id}"] )
+  	public_events.each do |pe|
+  		@events << pe
+  	end
+  	events = [] 
+  	@events.each do |event|
+    		events << {:id => event.id, :title => event.name, :description => event.desc, :color => event.color, :start => "#{event.from.iso8601}", :end => "#{event.to.iso8601}",:allDay => event.allDay}
+  	end
+  	render :text => events.to_json
 
   	end
 
@@ -53,7 +63,7 @@ class EventsController < ApplicationController
       new_to = (params[:minute_delta].to_i).minutes.from_now((params[:day_delta].to_i).days.from_now(@event.to))
       @event.update_attribute("to",new_to)
     end
-    
+
     respond_to do |format|
       format.js
     end    
@@ -107,4 +117,8 @@ class EventsController < ApplicationController
       @event = current_user.events.find_by_id(params[:id])
       redirect_to root_url if @event.nil?
   	end
+
+    def signed_in_user
+      redirect_to root_url unless signed_in?
+    end
 end

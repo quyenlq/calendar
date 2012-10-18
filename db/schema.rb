@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017075037) do
+ActiveRecord::Schema.define(:version => 20121018084105) do
+
+  create_table "event_sets", :force => true do |t|
+    t.integer  "frequency"
+    t.string   "period"
+    t.datetime "from"
+    t.datetime "to"
+    t.boolean  "allDay"
+    t.integer  "weekdays"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -19,13 +31,14 @@ ActiveRecord::Schema.define(:version => 20121017075037) do
     t.datetime "to"
     t.string   "position"
     t.string   "desc"
-    t.string   "color",      :default => "0"
-    t.integer  "privacy",    :default => 0
+    t.string   "color",        :default => "0"
+    t.integer  "privacy",      :default => 0
     t.boolean  "work"
     t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.boolean  "allDay"
+    t.integer  "event_set_id"
   end
 
   add_index "events", ["user_id", "created_at"], :name => "index_events_on_user_id_and_created_at"
