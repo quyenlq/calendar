@@ -1,0 +1,19 @@
+=form_tag 'events/get_pevents', method: :post, class: "select-form" do
+  .modal-header
+    %button.close{type: "button", "data-dismiss" => "modal", "aria-hidden" => "true"} ×
+    %h3#myModalLabel Select partner
+  .modal-body
+    %table.table.table-striped
+      %th{:style =>"width: 20%"} Check
+      %th Name
+      -@users.each do |user|
+        %tr
+          %td
+            =check_box_tag 'user_ids[]', user.id
+          %td
+            =user.name
+
+  .modal-footer
+    %button.btn{"data-dismiss" => "modal", "aria-hidden" => "true"} Close
+    =submit_tag "View", class: "btn btn-primary"
+

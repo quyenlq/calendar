@@ -18,10 +18,18 @@
       width: 50px;
   }
 }
-
-
-.big-title{
-    text-align: center;
+.select-form{
+  select{
+    display: inline;
+    width:300px;
+  }
+  .color1{
+    display: inline;
+  }
+}
+#add_more{
+    font-size: 85%;
+    margin-left: 15px;
 }
 
 #error_explanation {
@@ -47,26 +55,7 @@
     padding: 5px;
   }
 }
-.url-info{
-  .title{
-    margin: 10px 0 20px 0px;
-    font-weight: bold;
-    font-size: 130%;
-    img{
-      margin: 0 5px;
-    }    
-  }
-  .desc{
-    text-align: justify;
-    font-style: italic;
-    font-size: 80%;
-  }
- }
 
-.add-btn{
-  width: 95%;
-  margin: 10px 0 10px 0;
-}
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
@@ -77,98 +66,6 @@ input, textarea, select, .uneditable-input {
   @include box_sizing;
 }
 
-.item-link{
-  margin-bottom: 30px;
-  .title{
-      margin: 10px 0 20px 0px;
-      font-weight: bold;
-      img{
-        margin: 0 5px;
-      }    
-    }
-
-  .box-name{
-    margin-left: 5px;
-    font-style: italic;
-    font-size: 90%;
-  }
-
-  input{
-    margin: 5px;
-  }
-  .date{
-    display: inline;
-    color: #666;
-    font-size: 75%;
-    font-style: italic;
-  }
-  .toolbar{
-    margin: 10px 0 10px 0;
-    padding-left: 5px;
-  }
-
-  .details{
-    margin-top: 50px;
-    .desc{
-      font-size: 90%;
-      margin: 10px 0 0 5px;
-      text-align: justify;
-      font-style: italic;
-    }
-  .close{
-      padding-top: 30px;
-    }
-  }
-}
-/* CALENDAR */
-#calendar{
-  table{
-    border-collapse: collapse;
-    width: 100%;
-  }
-  td, th {
-    font-family: "Lucida Grande",arial,helvetica,sans-serif;
-    font-size: 10px;
-    padding: 6px;
-    border: 1px solid #999;
-  }
-  th {
-    background: #DDD;
-    color: #666;
-    text-align: center;
-    width: 14.2857142857143%;
-  }
-  td {
-  background: #FFF;
-  color: #777;
-  height: 80px;
-  vertical-align: top;
-  font-size: 16px;
-  }
-  #month {
-    margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-  }
-  .today {
-    background-color: #D7F2FF;
-  }
-  ul {
-    margin: 0;
-    margin-top: 5px;
-    padding: 0;
-    list-style: none;
-  }
-  li {
-    margin: 0;
-    padding: 0;
-    font-size: 11px;
-    text-align: center;
-  }
-
-}
-/*CALENDAR STYLE */
 
 #calendar{
   .fc-header{
@@ -198,7 +95,11 @@ input, textarea, select, .uneditable-input {
 body{
 	margin-top: 80px;
   background-color: #EEE !important;
+  .homepage{
+    text-align: center;
+  }
 }
+
 
 .bookmark{
   text-align: center;

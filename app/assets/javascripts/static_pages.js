@@ -16,7 +16,7 @@ $(document).ready(function(){
       else 
         $('#loading').hide();
     },
-    events: "/events/get_events",
+    events: 'events/get_events',
     timeFormat: 'h:mm t{ - h:mm t} ',
     dragOpacity: "0.5",
     eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){

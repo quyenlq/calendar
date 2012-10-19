@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
 	attr_accessible :allDay,:color, :desc, :from, :name, :position, :privacy, :to, :user_id,
-                  :work,:fromtime, :fromdate, :totime, :todate,:period, :frequency, :times
+                  :work,:fromtime, :fromdate, :totime, :todate,:period, :frequency, :times, :event_set_id
   attr_accessor :period, :frequency, :commit, :fromtime, :fromdate, :totime, :todate, :times
 
 	validates :name, presence:true, length: {minimum: 4, maximum: 100}

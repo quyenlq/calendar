@@ -1,0 +1,31 @@
+-provide(:title, "Partner events")
+.btn-group.page-header
+	=link_to 'CREATE', new_event_path, class: "btn btn-large btn-success"
+	=link_to 'PARTNER\'S CALENDAR', 'events/select_partner', remote: :true, class: "btn btn-large btn-primary"
+.span12	
+	#calendar1
+
+
+%script{:type => 'text/javascript'}
+	$(document).ready(function(){
+	$('#calendar1').fullCalendar({
+	editable: false,
+	header: {
+	left: 'prev,next today',
+	center: 'title',
+	right: 'month,agendaWeek,agendaDay'
+	},
+	defaultView: 'month',
+	height: 600,
+	width: 940,
+	slotMinutes: 30,
+	loading: function(bool){
+	if (bool) 
+	$('#loading').show();
+	else 
+	$('#loading').hide();
+	},
+	events: #{@pevents},
+	timeFormat: 'h:mm t{ - h:mm t} ',	
+	});
+	});

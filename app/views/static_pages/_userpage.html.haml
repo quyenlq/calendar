@@ -1,5 +1,6 @@
-.span3
-	=link_to 'Create new event', new_event_path, class: "btn btn-large btn-primary"
+.btn-group.page-header
+	=link_to 'CREATE', new_event_path, class: "btn btn-large btn-success"
+	=link_to 'PARTNER\'S CALENDAR', 'events/select_partner', remote: :true, class: "btn btn-large btn-primary"
 .span12
 	#calendar
 	#desc_dialog{style: "display:none"}

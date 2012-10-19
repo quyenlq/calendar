@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 	before_filter :correct_user, only: [:destroy, :edit, :update,:move, :resize]
-
+  before_filter :signed_in_user
 	def index
 	end
 
@@ -9,7 +9,6 @@ class EventsController < ApplicationController
 	end
 
 	def create
-    binding.pry
 		if(params[:event][:period] == "Does not repeat")
       @event = current_user.events.build(params[:event])
       if @event.save
@@ -28,18 +27,35 @@ class EventsController < ApplicationController
     end
 	end
 
+  def select_partner    
+    @users = User.find(:all, :conditions =>"id != #{current_user.id}")
+      if @users
+        respond_to do |format|
+          format.js
+        end
+      end
+  end
+
+  def get_pevents
+    users=User.find(params[:user_ids])
+    pevents=[]
+    users.each_with_index do |user,index|
+      results = user.events.find(:all, :conditions => ["privacy == 0"])
+      results.each do |result|
+        pcolor = get_color(index)
+        pevents<<{:id => result.id, :title => result.name, :description => result.desc, :color => pcolor, :start => "#{result.from.iso8601}", :end => "#{result.to.iso8601}",:allDay => result.allDay}
+        end
+    end
+    @pevents = pevents.to_json.html_safe
+  end
+
 	def get_events
   	@events = current_user.events.all
-  	public_events = Event.find(:all, :conditions => ["privacy == 0 and user_id != #{current_user.id}"] )
-  	public_events.each do |pe|
-  		@events << pe
-  	end
   	events = [] 
   	@events.each do |event|
     		events << {:id => event.id, :title => event.name, :description => event.desc, :color => event.color, :start => "#{event.from.iso8601}", :end => "#{event.to.iso8601}",:allDay => event.allDay}
   	end
   	render :text => events.to_json
-
   	end
 
   def move
@@ -120,5 +136,11 @@ class EventsController < ApplicationController
 
     def signed_in_user
       redirect_to root_url unless signed_in?
+    end
+
+    def get_color(index)
+      color=['#FF6600','#008000','#FF99CC','#800080','#3366FF',
+              '#99CCFF','#33CCCC','#993300','#333399','#FF00FF']
+      return color[index]
     end
 end

@@ -1,5 +1,6 @@
 class EventSetsController < ApplicationController
 	before_filter :signed_in_user
+	
 	def new
 		@event_set = EventSet.new
 		respond_to do |format|

@@ -18,7 +18,6 @@ class EventSet < ActiveRecord::Base
   default_scope order: 'event_sets.created_at DESC'
 
   def create_events
-    binding.pry
     t = times.to_i
     if t
       st = from
@@ -26,7 +25,7 @@ class EventSet < ActiveRecord::Base
       p = r_period(period)
       nst, net = st, et
       t.times do 
-        self.user.events.create(:name => name, :desc => desc, :allDay => allDay, :from => nst, :to => net,:color => color, :work => work)
+        e=self.user.events.create(:name => name, :desc => desc, :allDay => allDay, :from => nst, :to => net,:color => color, :work => work, :event_set_id => self.id)
         nst = st = frequency.send(p).from_now(st)
         net = et = frequency.send(p).from_now(et)
       

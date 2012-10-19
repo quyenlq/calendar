@@ -13,6 +13,8 @@ Calendar::Application.routes.draw do
   match '/events/move'
   match '/events/destroy'
   match '/events/edit'
+  match '/events/select_partner'
+  match '/events/get_pevents', via: :post
 
  
 
