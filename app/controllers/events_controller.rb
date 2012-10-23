@@ -23,6 +23,7 @@ class EventsController < ApplicationController
        flash[:success] = "Created new event"
        redirect_to root_url
       else
+       redirect_to new_event_path
       end
     end
 	end
@@ -37,10 +38,10 @@ class EventsController < ApplicationController
   end
 
   def get_pevents
-    users=User.find(params[:user_ids])
+    @users=User.find(params[:user_ids])
     pevents=[]
-    users.each_with_index do |user,index|
-      results = user.events.find(:all, :conditions => ["privacy == 0"])
+    @users.each_with_index do |user,index|
+      results = user.events.all#find(:all, :conditions => ["privacy != 2"])
       results.each do |result|
         pcolor = get_color(index)
         pevents<<{:id => result.id, :title => result.name, :description => result.desc, :color => pcolor, :start => "#{result.from.iso8601}", :end => "#{result.to.iso8601}",:allDay => result.allDay}
@@ -53,7 +54,11 @@ class EventsController < ApplicationController
   	@events = current_user.events.all
   	events = [] 
   	@events.each do |event|
-    		events << {:id => event.id, :title => event.name, :description => event.desc, :color => event.color, :start => "#{event.from.iso8601}", :end => "#{event.to.iso8601}",:allDay => event.allDay}
+        if(event.event_set)
+    		  events << {:id => event.id, :title => event.name, :description => event.desc,:position => event.position, :color => event.color, :start => "#{event.from.iso8601}", :end => "#{event.to.iso8601}",:allDay => event.allDay, :recurring => true}
+        else
+          events << {:id => event.id, :title => event.name, :description => event.desc,:position => event.position, :color => event.color, :start => "#{event.from.iso8601}", :end => "#{event.to.iso8601}",:allDay => event.allDay}
+        end
   	end
   	render :text => events.to_json
   	end
@@ -94,11 +99,11 @@ class EventsController < ApplicationController
   
   def update
     @event = Event.find(params[:id])
-    if params[:event][:commit] == "Update All Occurrence"
-      @events = @event.event_series.events
+    if params[:commit] == "Update All Occurrence"
+      @events = @event.event_set.events
       @event.update_events(@events, params[:event])
-    elsif params[:event][:commit] == "Update All Following Occurrence"
-      @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
+    elsif params[:commit] == "Update All Following Occurrence"
+      @events = @event.event_set.events.find(:all, :conditions => ["'from' > '#{@event.from.to_formatted_s(:db)}' "])
       @event.update_events(@events, params[:event])
     else
       @event.update_attributes(params[:event])
@@ -114,10 +119,10 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find_by_id(params[:id])
     if params[:delete_all] == 'true'
-      @event.event_series.destroy
+      @event.event_set.destroy
     elsif params[:delete_all] == 'future'
-      @events = @event.event_series.events.find(:all, :conditions => ["starttime > '#{@event.starttime.to_formatted_s(:db)}' "])
-      @event.event_series.events.delete(@events)
+      @events = @event.event_set.events.find(:all, :conditions => ["'from' > '#{@event.from.to_formatted_s(:db)}' "])
+      @event.event_set.events.delete(@events)
     else
       @event.destroy
     end

@@ -3,51 +3,61 @@
     %button.close{type: "button", "data-dismiss" => "modal", "aria-hidden" => "true"} ×
     %h3#myModalLabel Edit events
   .modal-body
-    %table
-      %tr
-        %td=f.label :name
-        %td{:colspan =>2}=f.text_field :name
-        
-      %tr
-        %td= f.label :allDay, "All day "
-        %td
-          = f.check_box :allDay
-      %tr
-        %td=f.label :from
-        %td=f.text_field :fromdate, class: "span3"
-        %td=f.text_field :fromtime, class: "span3"
-    
-      %tr
-        %td=f.label :to
-        %td=f.text_field :todate, class: "span3"
-        %td=f.text_field :totime, class: "span3"
+    %table.mytable
+      =form_for(@event) do |f| 
+        = render 'shared/error_messages' , object: @event
+        %tr
+          %td=f.label :name
+          %td{:colspan =>2}=f.text_field :name
 
-      %tr
-        %td=f.label :position
-        %td{:colspan =>2}=f.text_field :position
+        %tr
+          %td= f.label :period, "Repeats" 
+          %td
+            = f.select :period, Event::REPEATS, {}, :onchange => "showPeriodAndFrequency(this.value)"
+        =render 'event_set_form', f: f
 
-      %tr
-        %td=f.label :desc
-        %td{:colspan =>2}=f.text_area :desc, rows: 2, cols: 60
-      %tr
-        %td=f.label :color
-        %td{:colspan =>2}=f.text_field :color, class: "color1"
-      %tr
-        %td= f.label :work
-        %td
-          = f.radio_button :work, true, checked: true
-          Yes
-          
-        %td
-          = f.radio_button :work, false
-          No
+        %tr
+          %td=f.label :from
+          %td
+            =f.text_field :fromdate, class: "span2"
+            =f.text_field :fromtime, class: "span2"
       
+        %tr
+          %td=f.label :to
+          %td
+            =f.text_field :todate, class: "span2"
+            =f.text_field :totime, class: "span2"
+
+        %tr
+          %td=f.label :position
+          %td{:colspan =>2}=f.text_field :position
+
+        %tr
+          %td=f.label :desc
+          %td{:colspan =>2}=f.text_area :desc, rows: 2, cols: 60
+
+        %tr
+          %td= f.label :allDay, "All day "
+          %td
+            = f.check_box :allDay
+
+        %tr
+          %td=f.label :color
+          %td{:colspan =>2}=f.text_field :color, class: "color1"
+        %tr
+          %td= f.label :privacy
+          %td= f.select :privacy, options_for_select([["Public"], "Work", "Private"])      
 
         
   .modal-footer
     %button.btn{"data-dismiss" => "modal", "aria-hidden" => "true"} Close
-    =f.submit "Save changes", class: "btn btn-primary"
-
+    -if @event.event_set
+      =f.submit 'Update Only This Occurrence', :onclick => "document.getElementById('event_commit').value = this.value", class: "btn btn-primary btn-small"
+      =f.submit 'Update All Occurrence', :onclick => "document.getElementById('event_commit').value = this.value", class: "btn btn-success btn-small"
+      =f.submit 'Update All Following Occurrence', :onclick => "document.getElementById('event_commit').value = this.value", class: "btn btn-danger btn-small"
+    -else
+      =f.submit 'Update', :onclick => "document.getElementById('event_commit').value = this.value", class: "btn btn-primary btn-small"
+  
 
 
 

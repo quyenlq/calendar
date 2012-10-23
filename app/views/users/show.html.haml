@@ -1,21 +1,49 @@
--provide(:title, "Edit user")  
-%h1 Your profile
+-provide(:title, "#{@user.name}")  
+.mybody
+  .btn-group.page-header
+    =link_to 'CREATE', new_event_path, class: "btn btn-large btn-success"
+    =link_to 'PARTNER\'S CALENDAR', events_select_partner_path, remote: :true, class: "btn btn-large btn-primary"
+  .span12.mybody
+    #calendar1
+    #desc_dialog{style: "display:none"}
+      #event_info
+        <b>Desciption </b>
+        %span#event_desc
+        %br       
+        <b>Position </b>
+        %span#event_position
+        %br
+        <b> From: </b>
+        %span#event_from      
+        %br
+        <b> To : </b>
+        %span#event_to
+        %br
+      #event_actions
+        #btn-group.btn-group.pull-right.action-btn
 
-.row
-  .span6.offset3
-    = form_for(@user) do |f| 
-      = render 'shared/error_messages', object: @user 
 
-      = f.label :name 
-      = f.text_field :name 
+%script{:type => 'text/javascript'}
+  $(document).ready(function(){
+  $('#calendar1').fullCalendar({
+  editable: true,
+  header: {
+  left: 'prev,next today',
+  center: 'title',
+  right: 'month,agendaWeek,agendaDay'
+  },
+  defaultView: 'month',
+  height: 600,
+  width: 940,
+  slotMinutes: 30,
+  loading: function(bool){
+  if (bool) 
+  $('#loading').show();
+  else 
+  $('#loading').hide();
+  },
+  events: '../events/get_events',
+  timeFormat: 'h:mm t{ - h:mm t} ', 
+  });
+  });
 
-      = f.label :email 
-      = f.text_field :email 
-
-      = f.label :password 
-      = f.password_field :password 
-
-      = f.label :password_confirmation, "Confirm Password" 
-      = f.password_field :password_confirmation 
-
-      = f.submit "Save changes", class: "btn btn-large btn-primary" 

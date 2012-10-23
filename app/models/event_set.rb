@@ -1,10 +1,11 @@
 class EventSet < ActiveRecord::Base
   attr_accessible :allDay, :frequency, :from, :period, :to, :weekdays,:name, :desc, :commit, :color,
-                  :fromdate, :todate, :fromtime, :totime, :position, :work, :times
-  attr_accessor :name, :desc, :commit, :color, :fromdate, :todate, :position, :work, :fromtime, :totime, :times
+                  :fromdate, :todate, :fromtime, :totime, :position, :work, :times, :privacy
+  attr_accessor :name, :desc, :commit, :color, :fromdate, :todate, :position, :work, :fromtime, :totime, :times, :privacy
   
   validates_presence_of :frequency, :period, :from, :to
   validates_presence_of :name, :color
+  validates :times, :numericality => {:greater_than => 0, :only_integer => true}
   
   has_many :events, :dependent => :destroy
   belongs_to :user
@@ -25,7 +26,7 @@ class EventSet < ActiveRecord::Base
       p = r_period(period)
       nst, net = st, et
       t.times do 
-        e=self.user.events.create(:name => name, :desc => desc, :allDay => allDay, :from => nst, :to => net,:color => color, :work => work, :event_set_id => self.id)
+        e=self.user.events.create(:name => name, :desc => desc, :position => position , :allDay => allDay, :from => nst, :to => net,:color => color, :privacy => :privacy, :event_set_id => self.id)
         nst = st = frequency.send(p).from_now(st)
         net = et = frequency.send(p).from_now(et)
       
@@ -48,7 +49,7 @@ class EventSet < ActiveRecord::Base
     p = r_period(period)
     nst, net = st, et
     while frequency.send(p).from_now(st) <= END_TIME
-      self.user.events.create(:name => name, :desc => desc, :allDay => allDay, :from => nst, :to => net,:color => color, :work => work)
+      self.user.events.create(:name => name, :desc => desc, :allDay => allDay, :from => nst, :to => net,:color => color, :privacy => privacy)
       nst = st = frequency.send(p).from_now(st)
       net = et = frequency.send(p).from_now(et)
       

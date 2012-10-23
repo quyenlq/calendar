@@ -1,7 +1,8 @@
 -provide(:title, 'New event')
-%h1 Create new event
+.mybody
+  %h1.page-header Create new event
 .row
-  .span8.offset2
+  .span6.offset3
     %table.mytable
       =form_for(@event) do |f| 
         = render 'shared/error_messages' , object: @event
@@ -44,16 +45,13 @@
           %td=f.label :color
           %td{:colspan =>2}=f.text_field :color, class: "color1"
         %tr
-          %td= f.label :work
-          %td
-            = f.radio_button :work, true, checked: true
-            Yes
-            = f.radio_button :work, false
-            No
-        
+          %td= f.label :privacy
+          %td= f.select :privacy, options_for_select([["Public", 0], ["Work", 1], ["Private",2]])
+
+                    
         %tr
           %td
-          %td{:colspan =>3}= f.submit "Create", class: "btn btn-large btn-primary span4" 
+          %td{:colspan =>3}= f.submit "Create", class: "btn btn-large btn-primary span6" 
 
 
 

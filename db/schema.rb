@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018084105) do
+ActiveRecord::Schema.define(:version => 20121019080241) do
 
   create_table "event_sets", :force => true do |t|
     t.integer  "frequency"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(:version => 20121018084105) do
     t.string   "desc"
     t.string   "color",        :default => "0"
     t.integer  "privacy",      :default => 0
-    t.boolean  "work"
     t.integer  "user_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false

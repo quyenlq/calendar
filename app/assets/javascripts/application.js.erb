@@ -38,16 +38,19 @@ function moveEvent(event, dayDelta, minuteDelta, allDay){
 
   function showEventDetails(event){
     $('#event_desc').html(event.description);
-    $('#edit_event').html("<a href = 'javascript:void(0);' onclick ='editEvent(" + event.id + ")'>Edit</a>");
+    $('#event_position').html(event.position);
+    $('#event_from').html(event.start.toString().split("GMT")[0]);
+    $('#event_to').html(event.end.toString().split("GMT")[0]);
+    $('#btn-group').html("<a class='btn btn-small action-btn' href = 'javascript:void(0);' onclick ='editEvent(" + event.id + ")'>Edit</a>");
     if (event.recurring) {
-      title = event.title + "(Recurring)";
-      $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
-      $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
-      $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
+      title = event.title + "(Repeated)";
+      $('#btn-group').append("<a class='btn btn-small action-btn'href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This</a>");
+      $('#btn-group').append("<a class='btn btn-small action-btn' href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All</a>")
+      $('#btn-group').append("<a class='btn btn-small action-btn' href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
     }
     else {
       title = event.title;
-      $('#delete_event').html("<a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
+      $('#btn-group').append("<a class='btn btn-small action-btn' data-confirm='You sure? ' href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
     }
     $('#desc_dialog').dialog({
       title: title,

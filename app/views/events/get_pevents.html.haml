@@ -1,9 +1,15 @@
 -provide(:title, "Partner events")
-.btn-group.page-header
-	=link_to 'CREATE', new_event_path, class: "btn btn-large btn-success"
-	=link_to 'PARTNER\'S CALENDAR', 'events/select_partner', remote: :true, class: "btn btn-large btn-primary"
-.span12	
-	#calendar1
+.mybody
+	.btn-group.page-header
+		=link_to 'CREATE', new_event_path, class: "btn btn-large btn-success"
+		=link_to 'PARTNER\'S CALENDAR', 'events/select_partner', remote: :true, class: "btn btn-large btn-primary"
+	.span12
+		#notation.well
+			Users:
+			-@users.each_with_index do |user,index|
+				%strong=user.name
+				#color{:style => "background-color: #{get_color(index)}"}
+		#calendar1
 
 
 %script{:type => 'text/javascript'}

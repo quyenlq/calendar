@@ -1,9 +1,9 @@
-=form_tag 'events/get_pevents', method: :post, class: "select-form" do
+=form_tag  events_get_pevents_path, method: :post, class: "select-form" do
   .modal-header
     %button.close{type: "button", "data-dismiss" => "modal", "aria-hidden" => "true"} ×
     %h3#myModalLabel Select partner
   .modal-body
-    %table.table.table-striped
+    %table.table.table-striped.table-hover
       %th{:style =>"width: 20%"} Check
       %th Name
       -@users.each do |user|

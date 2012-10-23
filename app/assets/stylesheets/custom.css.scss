@@ -6,6 +6,22 @@
   box-sizing: border-box;
 }
 /*OVERRIDE BOOTSTRAP */
+
+.mybody{
+  text-align: center;
+}
+.action-btn{
+  margin-top: 10px;
+}
+#notation{
+  text-align: left;
+  #color{
+    display: inline-block;
+    width: 32px;
+    height: 12px ;
+    border: 1px solid gray;
+  }
+}
 .mytable{
   label{
     float:left;
@@ -26,10 +42,6 @@
   .color1{
     display: inline;
   }
-}
-#add_more{
-    font-size: 85%;
-    margin-left: 15px;
 }
 
 #error_explanation {

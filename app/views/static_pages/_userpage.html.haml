@@ -1,11 +1,24 @@
-.btn-group.page-header
-	=link_to 'CREATE', new_event_path, class: "btn btn-large btn-success"
-	=link_to 'PARTNER\'S CALENDAR', 'events/select_partner', remote: :true, class: "btn btn-large btn-primary"
-.span12
-	#calendar
-	#desc_dialog{style: "display:none"}
-		#event_desc
-
-		#event_actions
-			%span#edit_event
-			%span#delete_event
+.mybody
+	.btn-group.page-header
+		=link_to 'CREATE', new_event_path, class: "btn btn-large btn-success"
+		=link_to 'PARTNER\'S CALENDAR', 'events/select_partner', remote: :true, class: "btn btn-large btn-primary"
+	.span12
+		#calendar
+		#desc_dialog{style: "display:none"}
+			#event_info
+				<b>Desciption </b>
+				%span#event_desc
+				%br				
+				<b>Position </b>
+				%span#event_position
+				%br
+				<b> From: </b>
+				%span#event_from			
+				%br
+				<b> To : </b>
+				%span#event_to
+				%br
+			#event_actions
+				#btn-group.btn-group.pull-right.action-btn
+					
+				
